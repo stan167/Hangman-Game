@@ -7,9 +7,10 @@ def guess_word(word):
     else:
         return("n")
 
-def guess_letter(word_as_list):
+def guess_letter(word_as_list, list):
     guess = input("What letter do you want to guess? ")
     if guess not in word_as_list:
+        list.append(guess)
         return("n")
     else:
         while True:
@@ -21,12 +22,13 @@ def guess_letter(word_as_list):
 
 def show_info(letters_guessed, lives):
     print(f"You have guessed {letters_guessed}!")
-    print(f"You have {lives} left!")
+    print(f"You have {lives} lives left!")
     
     
     
 
-words = ["jazz", "horse", "radish", "school"]
+words = ["jazz", "horse", "radish", "school", "coding", "bear", "computer"]
+letters_guessed_wrong = []
 
 print("Welcome to my Hangman Game!")
 word = random.choice(words)
@@ -52,7 +54,8 @@ while True:
                      print("Unlucky, you are out of lives!")
                      break
         elif choice == "l":
-            letter_outcome = guess_letter(word_as_list)
+            print(f"You have already incorrectly guessed {letters_guessed_wrong}!")
+            letter_outcome = guess_letter(word_as_list, letters_guessed_wrong)
             if letter_outcome == "y":
                 print("Nice, you removed a/some letter(s)!")
                 if word_as_list != 0:
